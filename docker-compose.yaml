@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - shyMicro:/data/db
+    # env_file:
+    #   - .env
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+    #   - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+    #   - MONGO_INITDB_DATABASE=${DB_NAME}
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+volumes:
+  shyMicro:
